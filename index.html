@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title></title>
+        <title>Javascript Quiz</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="./assets/css/style.css">
@@ -20,9 +20,32 @@
         </header>
         <section id="instructions">
             <p>Click the "START" button to begin</p>
-            <button id="start-button" class="button" onclick="startQuiz()">START</button>
+            <button id="start-button" class="button">START</button>
         </section>
         
+        <!-- Button Based Code Begin -->
+        <div class="container">
+            <div id="question-container" class="hide">
+                <div id="question">Question</div>
+                <div id="answer-buttons" class="btn-grid">
+                <button class="btn">Answer1</button>
+                <button class="btn">Answer2</button>
+                <button class="btn">Answer3</button>
+                <button class="btn">Answer4</button>
+            </div>
+            <div class="controls">
+                <button id="next-button" class="next-btn btn">Next</button>
+            </div>
+            <div id="feedback" class="feedback">
+                <div id="feedback-correct" class="hide">
+                    <p>Your previous response was CORRECT!</p>
+                </div>
+                <div id="feedback-incorrect" class=" hide">
+                    <p>Your previous response was INCORRECT.</p>
+                </div>
+            </div>
+        </div>
+
         
     </body>
     <script src="./assets/js/app.js"></script>
