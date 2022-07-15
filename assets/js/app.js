@@ -5,6 +5,10 @@ const instructions = document.getElementById('instructions');
 const questionElement = document.getElementById('question');
 const answerButtonsElement = document.getElementById('answer-buttons')
 var score = 0;
+var previousReponse = "";
+const responseCorrect = document.getElementById('feedback-correct');
+const responseInorrect = document.getElementById('feedback-incorrect');
+var timeLeft = 100;
 
 let shuffledQuestions, currentQuestionIndex
 
@@ -23,6 +27,13 @@ function startGame(){
 function setNextQuestion(){
     resetState()
     showQuestion(shuffledQuestions[currentQuestionIndex])
+    if(previousReponse === "correct") {
+        document.getElementById('feedback-correct').classList.remove('hide')
+        responseInorrect.classList.add('hide')
+    } else if(previousReponse === "incorrect") {
+        responseCorrect.classList.add('hide')
+        responseInorrect.classList.remove('hide')
+    }
 }
 
 function showQuestion(myQuestions) {
@@ -52,12 +63,17 @@ function selectAnswer(e){
     console.log(selectedButton);
     if(correct) {
         score = score +1;
+        previousReponse = "correct"
+        console.log(previousReponse);
+    } else {
+        previousReponse = "incorrect"
     }
     console.log('score = ' + score);
     if(currentQuestionIndex < myQuestions.length -1) {
         currentQuestionIndex = currentQuestionIndex + 1;
         setNextQuestion();
     } else {
+        timeLeft = 0;
         console.log("finished")
     }
     
@@ -65,6 +81,14 @@ function selectAnswer(e){
     // Array.from(answerButtonsElement.children).forEach(button => {
     //     setStatusClass(button,button.dataset.correct)
     // })
+}
+
+function saveScore(){
+    let playerInitials = document.getElementById("playerInitials").value;
+    localStorage.setItem(playerInitials, score);
+
+    console.log(playerInitials);
+    console.log(score);
 }
 
 // function setStatusClass(element, correct) {
@@ -179,19 +203,19 @@ var myQuestions = [
 //     })
 // }
 
-// document.getElementById("start-button").addEventListener("click", function () {
-//     var timeLeft = 100;
+document.getElementById("start-button").addEventListener("click", function () {
 
-//     var timer = setInterval(function function1(){
-//         document.getElementById("timer-number").innerHTML = timeLeft + " seconds remaining";
 
-//         timeLeft -= 1;
-//         if(timeLeft <= 0) {
-//             clearInterval(timer);
-//             document.getElementById("timer-text").innerHTML = "Time is up!"
-//         }
-//     }, 1000);
-// });
+    var timer = setInterval(function function1(){
+        document.getElementById("timer-number").innerHTML = timeLeft + " seconds remaining";
+
+        timeLeft -= 1;
+        if(timeLeft <= 0) {
+            clearInterval(timer);
+            document.getElementById("timer-text").innerHTML = "The quiz is complete!"
+        }
+    }, 1000);
+});
 
 // function startQuiz (){
 //     var element = document.getElementById("instructions");
