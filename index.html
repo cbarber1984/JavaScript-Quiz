@@ -16,7 +16,6 @@
             <p id="high-scores-nav">View High Scores!</p>
             <div id="timer">
                 <p id="timer-text">Tme: <span id="timer-number">100 seconds remaining</span></p>
-                <progress value="0" max="100" id="progressBar"></progress>
             </div>
         </header>
         <section id="instructions">
@@ -46,7 +45,7 @@
                 </div>
             </div>
         </div>
-        <div id="results" class="container">
+        <div id="results" class="container hide">
             <h1 id="results-heading" class="results-heading">Your final score is <span id="final-score"></span>.</h1>
             <form id="score-form">
                 <label for="playerInitials">Enter Your Initials</label>
@@ -54,7 +53,7 @@
                 <button id="save-btn" type="button" class="btn" value="submit-score" onclick="checkHighScore()">Save Score</button>
             </form>
         </div>
-        <div id="high-scores" class="container">
+        <div id="high-scores" class="container hide">
             <h1 id="high-score-heading">High Scores</h1>
             <div id="scores-card" class="scorecard">
                 <!-- <p id="player-data"><span id="player-initials">Initials</span> - <span id="player-score">Score</span></p> -->

@@ -4,26 +4,23 @@ const resetButton = document.getElementById('reset-scores');
 const questionContainerElement = document.getElementById('question-container');
 const instructions = document.getElementById('instructions');
 const questionElement = document.getElementById('question');
+const results = document.getElementById('results');
 const answerButtonsElement = document.getElementById('answer-buttons')
+const highScoresElement = document.getElementById('high-scores');
 var score = 0;
+const displayScore = document.getElementById('final-score');
 const playerScore = [];
 var previousReponse = "";
 const responseCorrect = document.getElementById('feedback-correct');
 const responseInorrect = document.getElementById('feedback-incorrect');
 var timeLeft = 100;
 var quizTimer;
-
-// high scores
-// const highScores = [];
 const NO_OF_HIGH_SCORES = 10;
 const HIGH_SCORES = 'highScores';
 const highScoreString = localStorage.getItem(HIGH_SCORES);
-
-
 let shuffledQuestions, currentQuestionIndex
 
 startButton.addEventListener('click', startGame);
-// resetButton.addEventListener('click', resetScore);
 
 function startGame(){
     startButton.classList.add('hide')
@@ -32,7 +29,6 @@ function startGame(){
     questionContainerElement.classList.remove('hide');
     instructions.classList.add('hide')
     
-    //timeLeft = 100;
     startTimer();
     setNextQuestion();
 }
@@ -79,9 +75,7 @@ function selectAnswer(e){
     const selectedButton = e.target
     const correct = selectedButton.dataset.correct
     console.log(selectedButton);
-    if(correct) {
-        //playerScore.push(1);
-        
+    if(correct) {        
         score = score + 1;
         previousReponse = "correct"
         console.log(previousReponse);
@@ -93,6 +87,9 @@ function selectAnswer(e){
         currentQuestionIndex = currentQuestionIndex + 1;
         setNextQuestion();
     } else {
+        questionContainerElement.classList.add('hide');
+        results.classList.remove('hide');
+        displayScore.innerHTML = score;
         timeLeft = 0;
         console.log("finished")
     }
@@ -110,15 +107,9 @@ function saveScore(score, highScores){
     const scoreToSave = playerScore.length;
     // const newScore = {scoreToSave, name}
     const newScore = {score, name}
-    console.log(`name = ` + name);
-    console.log(`newScore = ` + JSON.stringify(newScore));
-    console.log(`highScores = ` + highScores);
-    
 
     // add score to list
-    // highScores.push(newScore);
     highScores.push(newScore);
-
 
     // sort the list
     highScores.sort((a, b) => b.score - a.score);
@@ -128,6 +119,11 @@ function saveScore(score, highScores){
 
     // save to local storage
     localStorage.setItem(HIGH_SCORES, JSON.stringify(highScores));
+
+    // hide quiz result section & display high scores
+    results.classList.add('hide');
+    highScoresElement.classList.remove('hide');
+
 }
 
 function checkHighScore(){
