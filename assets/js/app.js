@@ -1,5 +1,6 @@
 const startButton = document.getElementById('start-button');
 const nextButton = document.getElementById('next-button');
+const resetButton = document.getElementById('reset-scores');
 const questionContainerElement = document.getElementById('question-container');
 const instructions = document.getElementById('instructions');
 const questionElement = document.getElementById('question');
@@ -22,6 +23,8 @@ const highScoreString = localStorage.getItem(HIGH_SCORES);
 let shuffledQuestions, currentQuestionIndex
 
 startButton.addEventListener('click', startGame);
+// resetButton.addEventListener('click', resetScore);
+
 function startGame(){
     startButton.classList.add('hide')
     shuffledQuestions = myQuestions.sort(() => Math.random() -.5)
@@ -32,6 +35,11 @@ function startGame(){
     //timeLeft = 100;
     startTimer();
     setNextQuestion();
+}
+
+function resetScore(){
+    localStorage.clear();
+    showHighScore();
 }
 
 function setNextQuestion(){
@@ -140,10 +148,7 @@ function checkHighScore(){
 
 }
 
-// const highScoreList = document.getElementById(HIGH_SCORES);
 
-// highScoreList.innerHTML = highScores.map((score) => 
-// `<li>${score.score} - ${score.name}`);
 
 function quizComplete(){
     checkHighScore(account.score);
@@ -165,19 +170,10 @@ function showHighScore(){
 
 }
 
-// function setStatusClass(element, correct) {
-//     clearStatusClass(element)
-//     if(correct) {
-//         element.classList.add('correct')
-//     } else {
-//         element.classList.add('wrong')
-//     }
-// }
+function reload(){
+    location.reload();
+}
 
-// function clearStatusClass(element){
-//     element.classList.remove('correct')
-//     element.classList.remove('wrong')
-// }
 
 var myQuestions = [
     {
@@ -223,27 +219,3 @@ function startTimer(){
                 }
             }, 1000);
 };
-
-// WORKING TIMER
-// document.getElementById("start-button").addEventListener("click", function () {
-//     var timer = setInterval(function function1(){
-//         document.getElementById("timer-number").innerHTML = timeLeft + " seconds remaining";
-
-//         timeLeft -= 1;
-//         if(timeLeft <= 0) {
-//             clearInterval(timer);
-//             document.getElementById("timer-text").innerHTML = "The quiz is complete!"
-//         }
-//     }, 1000);
-// });
-
-// function startQuiz (){
-//     var element = document.getElementById("instructions");
-//     element.style.display = "none";
-
-//     //quizProgressBar();
-//     //countdown();
-//     buildQuiz();
-// }
-
-// submitButton.addEventListener('click', showResults);
