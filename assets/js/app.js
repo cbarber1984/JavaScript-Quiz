@@ -5,14 +5,21 @@ const instructions = document.getElementById('instructions');
 const questionElement = document.getElementById('question');
 const answerButtonsElement = document.getElementById('answer-buttons')
 var score = 0;
+const playerScore = [];
 var previousReponse = "";
 const responseCorrect = document.getElementById('feedback-correct');
 const responseInorrect = document.getElementById('feedback-incorrect');
 var timeLeft = 100;
+var quizTimer;
+
+// high scores
+// const highScores = [];
+const NO_OF_HIGH_SCORES = 10;
+const HIGH_SCORES = 'highScores';
+const highScoreString = localStorage.getItem(HIGH_SCORES);
+
 
 let shuffledQuestions, currentQuestionIndex
-
-
 
 startButton.addEventListener('click', startGame);
 function startGame(){
@@ -21,6 +28,9 @@ function startGame(){
     currentQuestionIndex = 0;
     questionContainerElement.classList.remove('hide');
     instructions.classList.add('hide')
+    
+    //timeLeft = 100;
+    startTimer();
     setNextQuestion();
 }
 
@@ -62,13 +72,15 @@ function selectAnswer(e){
     const correct = selectedButton.dataset.correct
     console.log(selectedButton);
     if(correct) {
-        score = score +1;
+        //playerScore.push(1);
+        
+        score = score + 1;
         previousReponse = "correct"
         console.log(previousReponse);
     } else {
         previousReponse = "incorrect"
     }
-    console.log('score = ' + score);
+    console.log('score = ' + score + ' playerScore.length = ' + playerScore.length);
     if(currentQuestionIndex < myQuestions.length -1) {
         currentQuestionIndex = currentQuestionIndex + 1;
         setNextQuestion();
@@ -83,12 +95,74 @@ function selectAnswer(e){
     // })
 }
 
-function saveScore(){
+function saveScore(score, highScores){
     let playerInitials = document.getElementById("playerInitials").value;
-    localStorage.setItem(playerInitials, score);
+    const name = playerInitials;
+    console.log(`playerScore = ` + playerScore.length);
+    const scoreToSave = playerScore.length;
+    // const newScore = {scoreToSave, name}
+    const newScore = {score, name}
+    console.log(`name = ` + name);
+    console.log(`newScore = ` + JSON.stringify(newScore));
+    console.log(`highScores = ` + highScores);
+    
 
-    console.log(playerInitials);
-    console.log(score);
+    // add score to list
+    // highScores.push(newScore);
+    highScores.push(newScore);
+
+
+    // sort the list
+    highScores.sort((a, b) => b.score - a.score);
+
+    // select new list
+    highScores.splice(NO_OF_HIGH_SCORES);
+
+    // save to local storage
+    localStorage.setItem(HIGH_SCORES, JSON.stringify(highScores));
+}
+
+function checkHighScore(){
+    console.log(`checkHighScore score = ` + score);
+    const highScores = JSON.parse(highScoreString) ?? [];
+    const lowestScore = highScores[NO_OF_HIGH_SCORES - 1]?.score ?? 0;
+    console.log(`checkHighScore highScores = ` + highScores);
+    console.log(`lowestScore = ` + lowestScore);
+
+    if(score > lowestScore) {
+        saveScore(score, highScores);
+        showHighScore();
+    } else {
+        showHighScore();
+    }
+
+    console.log(`checkHighScore end highScores = ` + highScores);
+
+}
+
+// const highScoreList = document.getElementById(HIGH_SCORES);
+
+// highScoreList.innerHTML = highScores.map((score) => 
+// `<li>${score.score} - ${score.name}`);
+
+function quizComplete(){
+    checkHighScore(account.score);
+
+}
+
+function showHighScore(){
+    const highScores = JSON.parse(localStorage.getItem(HIGH_SCORES)) ?? [];
+    const highScoreList = document.getElementById(HIGH_SCORES);
+    let str = JSON.stringify(highScores);
+    console.log(`showHighScore highScores = ` + str);
+    
+    highScoreList.innerHTML = highScores.map((score) => `<li>${score.name} - Score: ${score.score}</li>`).join('');
+    // let newArray = highScores.map((score) => `<li>${score.score} - ${score.name}</li>`).join('');
+    // console.log('newArray = ' + newArray);
+
+    let str2 = JSON.stringify(highScoreList);
+    console.log(`highScoreList = ` + str2);
+
 }
 
 // function setStatusClass(element, correct) {
@@ -137,85 +211,31 @@ var myQuestions = [
     }
 ];
 
-
-
-
-
-
-// var timeLeft = 100;
-// var secondsEl = document.getElementById('timer-number');
-
-
-
-// const quizContainer = document.getElementById('quiz');
-// const resultsContainer = document.getElementById('results');
-// const submitButton = document.getElementById('submit');
-
-// function buildQuiz(){
-//     // variable to store the HTML output
-//     const output = [];
-
-//     // for each question...
-//     myQuestions.forEach(
-//         (currentQuestion, questionNumber) => {
-//             // variable to store the list of possible answers
-//             const answers =[];
-
-//             // and for each available answer...
-//             for(letter in currentQuestion.answers){
-                
-//                 // ...add an HTML radio button
-//                 answers.push(
-//                     `<label>
-//                     <input type="button" name="question${questionNumber}" value="${currentQuestion.answers[letter]}"> 
-//                     </label>`
-//                 );
-                    
-//             }
-
-//             // add this question and its answers to the output
-//             output.push(
-//                 `<div class="question"> ${currentQuestion.question} </div> 
-//                 <div class="answers">${answers.join('')} </div>`
-//             );
-//         }
-//     );
-
-//     // finally combine our output list into one string of HTML and put it on the page
-//     quizContainer.innerHTML = output.join('');
-// }
-
-// function showResults(){
-//     console.log('show results');
-
-//     // gather answer containers from our quiz
-//     const answerContainers = quizContainer.querySelectorAll('.answers');
-
-//     // keep track of user's answers
-//     let numCorrect = 0;
-
-//     // for each question...
-//     myQuestions.forEach((currentQuestion, questionNumber) => {
-
-//         // find selected answer
-//         const answerContainer = answerContainers[questionNumber];
-//         const selector = `input[name=question${questionNumber}]:checked`;
-//     })
-// }
-
-document.getElementById("start-button").addEventListener("click", function () {
-
-
+function startTimer(){
     var timer = setInterval(function function1(){
-        document.getElementById("timer-number").innerHTML = timeLeft + " seconds remaining";
+                document.getElementById("timer-text").innerHTML = "You have " + timeLeft + " seconds remaining";
+                timeLeft -= 1;                
+                console.log(`time left = ` + timeLeft);
+                if(timeLeft <= 0) {
+                    clearInterval(timer);
+                    document.getElementById("timer-text").innerHTML = "The quiz is complete!"
+                    timeLeft = 100;
+                }
+            }, 1000);
+};
 
-        timeLeft -= 1;
-        if(timeLeft <= 0) {
-            clearInterval(timer);
-            document.getElementById("timer-text").innerHTML = "The quiz is complete!"
-        }
-    }, 1000);
-});
+// WORKING TIMER
+// document.getElementById("start-button").addEventListener("click", function () {
+//     var timer = setInterval(function function1(){
+//         document.getElementById("timer-number").innerHTML = timeLeft + " seconds remaining";
+
+//         timeLeft -= 1;
+//         if(timeLeft <= 0) {
+//             clearInterval(timer);
+//             document.getElementById("timer-text").innerHTML = "The quiz is complete!"
+//         }
+//     }, 1000);
+// });
 
 // function startQuiz (){
 //     var element = document.getElementById("instructions");

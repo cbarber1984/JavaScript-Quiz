@@ -10,3 +10,4 @@ Build a timed coding quiz based upon multiple choice questions.
 
 ## What I Learned
 - Implementation of a progress bar
+- What the nullish coalescing operator (??) is

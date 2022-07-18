@@ -72,6 +72,29 @@ body {
     border-top: #361c75 solid;
 }
 
+#app-container {
+    display:block;
+}
+
+#score-form {
+    margin: 10px 0px 5px 0px;
+}
+
+#save-btn {
+    margin: 10px 0px 5px 0px;
+}
+
+.scorecard {
+    background-color: #d9d3e9;
+    border-radius: 5px;
+    display: block;
+    padding: 2px;
+}
+
+#high-score-btns {
+    margin: 10px 0px 5px 0px;
+}
+
 .hide {
     display: none;
 }

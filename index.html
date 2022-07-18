@@ -10,6 +10,7 @@
         <!-- <script src="./assets/js/app.js"></script> -->
     </head>
     <body>
+        <div id="app-container" class="container">
         <header>
             <h1>JavaScript Quiz</h1>
             <p id="high-scores-nav">View High Scores!</p>
@@ -20,11 +21,11 @@
         </header>
         <section id="instructions">
             <p>Click the "START" button to begin</p>
-            <button id="start-button" class="button">START</button>
+            <button id="start-button" class="btn">START</button>
         </section>
         
         <!-- Button Based Code Begin -->
-        <div class="container">
+        
             <div id="question-container" class="hide">
                 <div id="question">Question</div>
                 <div id="answer-buttons" class="btn-grid">
@@ -47,11 +48,22 @@
         </div>
         <div id="results" class="container">
             <h1 id="results-heading" class="results-heading">Your final score is <span id="final-score"></span>.</h1>
-            <form>
+            <form id="score-form">
                 <label for="playerInitials">Enter Your Initials</label>
                 <input type="text" id="playerInitials" name="playerInitials"> 
-                <button type="button" value="submit-score" onclick="saveScore()">Save Score</button>
+                <button id="save-btn" type="button" class="btn" value="submit-score" onclick="checkHighScore()">Save Score</button>
             </form>
+        </div>
+        <div id="high-scores" class="container">
+            <h1 id="high-score-heading">High Scores</h1>
+            <div id="scores-card" class="scorecard">
+                <!-- <p id="player-data"><span id="player-initials">Initials</span> - <span id="player-score">Score</span></p> -->
+                <ol id="highScores"></ol>
+            </div>
+            <div id="high-score-btns">
+                <button id="retake-quiz" class="btn" onclick="startGame()">Retake Quiz</button>
+                <button id="reset-scores" class="btn">Reset Scores</button> 
+            </div> 
         </div>
         </div>
 
