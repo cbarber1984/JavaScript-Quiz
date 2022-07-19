@@ -9,6 +9,7 @@
 
 }
 
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap');
 
 body {
     padding: 0;
@@ -17,7 +18,42 @@ body {
     width: 100vw;
     height: 100vw;
     justify-content: center;
+    /* align-items: center; */
+    font-family: 'Poppins', sans-serif;
+
+}
+
+#question {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+#answer-buttons button{
+    font-size: 1rem;
+}
+
+.header {
+    display: inline-flex;
+    flex-wrap: wrap;
+    gap: 15px;
     align-items: center;
+    color: var(--primary);
+    width: 100;
+}
+
+#instructions {
+    text-align: center;
+}
+
+#banner-details {
+    display: inline-flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    align-items: center;
+}
+
+#banner-details a {
+    text-decoration: none;
 }
 
 .container {
@@ -74,6 +110,7 @@ body {
 
 #app-container {
     display:block;
+    align-items: center;
 }
 
 #score-form {

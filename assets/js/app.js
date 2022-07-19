@@ -80,7 +80,8 @@ function selectAnswer(e){
         previousReponse = "correct"
         console.log(previousReponse);
     } else {
-        previousReponse = "incorrect"
+        previousReponse = "incorrect";
+        timeLeft = timeLeft - 10;
     }
     console.log('score = ' + score + ' playerScore.length = ' + playerScore.length);
     if(currentQuestionIndex < myQuestions.length -1) {
@@ -144,8 +145,6 @@ function checkHighScore(){
 
 }
 
-
-
 function quizComplete(){
     checkHighScore(account.score);
 
@@ -164,6 +163,12 @@ function showHighScore(){
     let str2 = JSON.stringify(highScoreList);
     console.log(`highScoreList = ` + str2);
 
+}
+
+function linkToHighScore(){
+    instructions.classList.add('hide');
+    highScoresElement.classList.remove('hide');
+    showHighScore();
 }
 
 function reload(){
