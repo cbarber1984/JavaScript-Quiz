@@ -16,3 +16,7 @@ Build a timed coding quiz based upon multiple choice questions.
 - Manipulating the DOM in response to user input using JavaScript
 - Use of the nullish coalescing operator (??)
 - Use of the setInterval method
+
+![screenshot](./assets/images/quiz_screenshot_2.png)
+
+![screenshot](./assets/images/quiz_screenshot_3.png)
