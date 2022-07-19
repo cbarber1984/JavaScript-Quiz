@@ -1,5 +1,9 @@
 # JavaScript-Quiz
 
+This project is available at [https://cbarber1984.github.io/JavaScript-Quiz/]
+
+(/assets/images/quiz_screenshot_1)
+
 ## Objective
 Build a timed coding quiz based upon multiple choice questions.
 
@@ -9,5 +13,6 @@ Build a timed coding quiz based upon multiple choice questions.
 - JavaScript
 
 ## What I Learned
-- Implementation of a progress bar
-- What the nullish coalescing operator (??) is
+- Manipulating the DOM in response to user input using JavaScript
+- Use of the nullish coalescing operator (??)
+- Use of the setInterval method
