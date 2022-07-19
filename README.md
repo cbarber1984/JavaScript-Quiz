@@ -2,7 +2,7 @@
 
 This project is available at [https://cbarber1984.github.io/JavaScript-Quiz/]
 
-![screenshot](/assets/images/quiz_screenshot_1)
+![screenshot](./assets/images/quiz_screenshot_1.png)
 
 ## Objective
 Build a timed coding quiz based upon multiple choice questions.
