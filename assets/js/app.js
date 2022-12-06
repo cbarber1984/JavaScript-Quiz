@@ -209,6 +209,28 @@ var myQuestions = [
        
     },
     {
+        question: "How is a forEach statement different from a for statement?",
+        answers: [
+             {text: "Only a for statement uses a callback function.", correct: false},
+            {text: "A forEach statement is generic, but a for statement can be used only with an array.", correct: false},
+            {text: "Only a forEach statement lets you specify your own iterator.", correct: false},
+            {text: "A for statement is generic, but a forEach statement can be used only with an array.", correct: true}
+        ]
+        
+       
+    },
+        {
+        question: "Which statement is the correct way to create a variable called rate and assign it the value 100?",
+        answers: [
+             {text: "`let rate = 100", correct: true},
+            {text: "let 100 = rate", correct: false},
+            {text: "100 = let rate", correct: false},
+            {text: "rate = 100", correct: false}
+        ]
+        
+       
+    },
+    {
         question: "Which tool can you use to ensure code quality?",
         answers: [
             {text: "Angular", correct: false},
