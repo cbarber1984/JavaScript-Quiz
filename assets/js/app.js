@@ -197,6 +197,17 @@ var myQuestions = [
         
        
     },
+     {
+        question: "Which operator returns true if the two compared values are not equal?",
+        answers: [
+            {text: "<>", correct: false},
+            {text: "~", correct: false},
+            {text: "==!", correct: false},
+            {text: "!==", correct: true}
+        ]
+        
+       
+    },
     {
         question: "Which tool can you use to ensure code quality?",
         answers: [
